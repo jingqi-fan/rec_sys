@@ -1,0 +1,78 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hybrid-recommender-pipeline"
+version = "0.1.0"
+description = "A hybrid recommendation system pipeline with embedding retrieval, generative retrieval, and adaptive diversity reranking."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "datasets",
+    "duckdb",
+    "faiss-cpu",
+    "fastapi",
+    "grpcio",
+    "grpcio-tools",
+    "huggingface-hub",
+    "jsonlines",
+    "k-means-constrained",
+    "numpy",
+    "pandas",
+    "peft",
+    "pyarrow",
+    "python-dotenv",
+    "ray",
+    "requests",
+    "scikit-learn",
+    "themoviedb[full]",
+    "torch",
+    "transformers",
+    "uvicorn",
+]
+
+[project.optional-dependencies]
+api = ["openai"]
+dev = ["pytest"]
+
+[tool.setuptools.packages.find]
+include = [
+    "configs*",
+    "data*",
+    "embedding*",
+    "eval*",
+    "feature*",
+    "generative*",
+    "llm_train*",
+    "model*",
+    "proto*",
+    "rerank*",
+    "server*",
+    "trainer*",
+]
+exclude = [
+    "examples*",
+    "experiments*",
+    "tests*",
+    "tutorials*",
+]
+
+[tool.black]
+line-length = 180
+target-version = ['py312']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | site-packages
+)/
+'''
